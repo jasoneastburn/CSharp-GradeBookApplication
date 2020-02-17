@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Linq;
+using GradeBook.Enums;
+
 namespace GradeBook.GradeBooks
 {
     public class RankedGradeBook : BaseGradeBook
     {
-        public RankedGradeBook(string name) : base(name) => Type = Enums.GradeBookType.Ranked;
-    }
 
-    public override char GetLetterGrade(double averageGrade)
+        public RankedGradeBook(string name) : base(name) => Type = GradeBookType.Ranked;
+
+        public override char GetLetterGrade(double averageGrade)
     {
         if (Students.Count < 5)
         {
-            return InvalidOperationException("Rank requires at least 5 students");
+            throw new InvalidOperationException("Rank requires at least 5 students");
         }
 
         var threshold = (int)Math.Ceiling(Students.Count * 0.2);
@@ -34,7 +36,7 @@ namespace GradeBook.GradeBooks
             return 'D';
         } else
         {
-            return 'F';
+        return 'F';
         }
     }
 }
